@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  fnmusic:
+    build: https://github.com/xbnndx/fnmusic.git#main:app
+    image: fnmusic:latest
+    container_name: fnmusic
+    restart: unless-stopped
+    ports:
+      - "8163:8000"
+    volumes:
+      - fnmusic-data:/app/data
+      - fnmusic-music:/app/data/music
+    environment:
+      - DATABASE_URL=sqlite:///./data/music.db
+      - MUSIC_DIR=/app/data/music
+      - SECRET_KEY=please-change-this-secret-key
+      - DEBUG=false
+
+volumes:
+  fnmusic-data:
+  fnmusic-music:
