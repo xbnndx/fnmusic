@@ -1,4 +1,5 @@
-FROM python:3.11-slim
+# 使用阿里云镜像
+FROM registry.cn-hangzhou.aliyuncs.com/library/python:3.11-slim
 
 LABEL maintainer="MusicApp Team"
 LABEL description="Music service for FeiNiu NAS"
@@ -6,6 +7,9 @@ LABEL version="1.0.0"
 
 # 设置工作目录
 WORKDIR /app
+
+# 使用阿里云apt源
+RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list 2>/dev/null || true
 
 # 安装系统依赖
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -19,7 +23,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # 复制依赖文件
 COPY requirements.txt .
 
-# 安装Python依赖
+# 安装Python依赖（使用清华源）
 RUN pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 # 复制应用代码
@@ -45,10 +49,6 @@ ENV PYTHONUNBUFFERED=1 \
     MUSIC_DIR=/app/data/music \
     SECRET_KEY=please-change-this-secret-key \
     DEBUG=false
-
-# 健康检查
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD python -c "import requests; requests.get('http://localhost:8000/health')" || exit 1
 
 # 启动命令
 CMD ["python", "run.py"]
