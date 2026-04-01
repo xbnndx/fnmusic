@@ -28,14 +28,14 @@ bash install.sh
 
 ## 🌐 访问地址
 
-- API文档：`http://NAS_IP:8001/docs`
-- 服务端口：**8001**（避免与飞牛NAS默认端口冲突）
+- API文档：`http://NAS_IP:8163/docs`
+- 服务端口：**8163**
 
 ## 📱 Android客户端
 
 在Android应用设置中，服务器地址填：
 ```
-http://你的NAS_IP:8001
+http://你的NAS_IP:8163
 ```
 
 ## 🔧 常用命令
@@ -63,6 +63,6 @@ bash /share/MusicApp/fnmusic/uninstall.sh
 
 ## ⚠️ 注意事项
 
-- 默认端口：**8001**
+- 默认端口：**8163**
 - 仅供学习交流使用
 - 请支持正版音乐
