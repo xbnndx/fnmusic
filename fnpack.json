@@ -1,0 +1,18 @@
+{
+  "fnmusic": {
+    "display_name": "音乐服务",
+    "desc": "支持网易云音乐、QQ音乐、酷狗音乐的歌单导入和无损音乐下载服务\n功能特性：\n• 网易云音乐账号登录\n• 每日推荐歌曲\n• 排行榜榜单\n• 歌单一键导入\n• 多平台无损音乐下载\n• Android客户端支持",
+    "labels": "音乐,Docker,媒体",
+    "version": "1.0.0",
+    "author": "MusicApp Team",
+    "author_url": "https://github.com/your-repo/fnmusic",
+    "bug_report_url": "https://github.com/your-repo/fnmusic/issues",
+    "install_type": "存储空间",
+    "size": "150",
+    "isdocker": "true",
+    "platform": ["x86", "arm"],
+    "history": {
+      "v1.0.0": "首发版本\n• 支持网易云音乐登录、每日推荐、排行榜\n• 支持QQ音乐、酷狗音乐搜索下载\n• 支持歌单导入和管理\n• 支持无损音乐下载"
+    }
+  }
+}

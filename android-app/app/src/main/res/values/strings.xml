@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">音乐APP</string>
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="username">用户名</string>
+    <string name="password">密码</string>
+    <string name="search">搜索</string>
+    <string name="playlists">歌单</string>
+    <string name="rankings">排行榜</string>
+    <string name="daily_recommend">每日推荐</string>
+    <string name="downloads">下载</string>
+    <string name="settings">设置</string>
+    <string name="logout">退出登录</string>
+</resources>

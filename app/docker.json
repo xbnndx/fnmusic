@@ -1,0 +1,88 @@
+{
+  "version": "1.0.0",
+  "app_name": "fnmusic",
+  "display_name": "音乐服务",
+  "description": "支持网易云音乐、QQ音乐、酷狗音乐的歌单导入和无损音乐下载服务",
+  "author": "MusicApp Team",
+  "website": "https://github.com/your-repo/fnmusic",
+  "icon": "ICON.PNG",
+  "categories": ["media", "music"],
+  
+  "docker": {
+    "image": "python:3.11-slim",
+    "build": true,
+    "dockerfile": "Dockerfile",
+    "ports": [
+      {
+        "container": 8000,
+        "host": 8000,
+        "protocol": "tcp",
+        "description": "Web服务端口"
+      }
+    ],
+    "volumes": [
+      {
+        "container": "/app/data",
+        "host": "/share/MusicApp/data",
+        "description": "数据存储目录（数据库、配置）"
+      },
+      {
+        "container": "/app/data/music",
+        "host": "/share/MusicApp/music",
+        "description": "音乐文件存储目录"
+      }
+    ],
+    "environment": [
+      {
+        "name": "SECRET_KEY",
+        "description": "安全密钥",
+        "default": "please-change-this-secret-key",
+        "required": false
+      },
+      {
+        "name": "DEBUG",
+        "description": "调试模式",
+        "default": "false",
+        "required": false
+      },
+      {
+        "name": "DATABASE_URL",
+        "description": "数据库连接",
+        "default": "sqlite:///./data/music.db",
+        "required": false
+      },
+      {
+        "name": "MUSIC_DIR",
+        "description": "音乐存储路径",
+        "default": "/app/data/music",
+        "required": false
+      }
+    ],
+    "restart": "unless-stopped",
+    "network": "bridge",
+    "privileged": false
+  },
+  
+  "requirements": {
+    "cpu": 1,
+    "memory": 512,
+    "storage": "1GB",
+    "arch": ["x86_64", "aarch64"]
+  },
+  
+  "ui": {
+    "type": "web",
+    "url": "http://localhost:8000",
+    "api_docs": "http://localhost:8000/docs"
+  },
+  
+  "post_install": {
+    "message": "安装完成！请访问 http://NAS_IP:8000 查看API文档，或在Android应用中配置服务器地址。",
+    "steps": [
+      "服务已自动启动",
+      "默认端口: 8000",
+      "音乐文件存储: /share/MusicApp/music",
+      "API文档: http://NAS_IP:8000/docs"
+    ]
+  }
+}
