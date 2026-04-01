@@ -1,64 +1,68 @@
-# 飞牛NAS音乐服务
+# 飞牛NAS 音乐服务
 
 支持网易云音乐、QQ音乐、酷狗音乐的歌单导入和无损音乐下载服务。
 
-## 功能特性
+## 🚀 一键安装
 
-- 🎵 **网易云音乐**：账号登录、每日推荐、排行榜、歌单导入、无损下载
-- 🔍 **QQ音乐**：搜索、无损下载、排行榜
-- 🎧 **酷狗音乐**：搜索、无损下载
-- 📱 **Android客户端**：Material Design 3 界面、后台播放支持
-
-## 快速安装
-
-### 方法一：应用商店上传
-
-1. 下载 `fnmusic.fpk` 文件
-2. 打开飞牛NAS应用中心 → 设置 → 手动安装应用
-3. 上传fpk文件，点击安装
-
-### 方法二：Docker手动部署
+SSH连接到飞牛NAS，执行：
 
 ```bash
-docker build -t fnmusic ./app
-docker run -d -p 8000:8000 \
-  -v /share/MusicApp/data:/app/data \
-  -v /share/MusicApp/music:/app/data/music \
-  --name fnmusic \
-  fnmusic
+curl -fsSL https://github.com/xbnndx/fnmusic/raw/main/install.sh | bash
 ```
 
-## 访问地址
+## 📦 手动安装
 
-- API文档：`http://NAS_IP:8000/docs`
-- 服务端口：8000
+```bash
+# 1. SSH连接
+ssh admin@你的NAS_IP
+sudo -i
 
-## Android客户端
+# 2. 创建目录并下载
+mkdir -p /share/MusicApp && cd /share/MusicApp
+git clone https://github.com/xbnndx/fnmusic.git
+cd fnmusic
 
-在 `android-app` 目录下，使用Android Studio打开项目构建APK。
-
-## 目录结构
-
-```
-fnmusic/
-├── fnpack.json      # 应用商店配置
-├── fnmusic.fpk      # 安装包
-├── ICON.PNG         # 图标
-├── app/             # 后端源码
-│   ├── Dockerfile
-│   ├── docker.json
-│   ├── requirements.txt
-│   ├── run.py
-│   └── app/         # Python代码
-└── android-app/     # Android客户端源码
+# 3. 执行安装
+bash install.sh
 ```
 
-## 注意事项
+## 🌐 访问地址
 
+- API文档：`http://NAS_IP:8001/docs`
+- 服务端口：**8001**（避免与飞牛NAS默认端口冲突）
+
+## 📱 Android客户端
+
+在Android应用设置中，服务器地址填：
+```
+http://你的NAS_IP:8001
+```
+
+## 🔧 常用命令
+
+```bash
+# 查看日志
+docker logs -f fnmusic
+
+# 重启服务
+docker restart fnmusic
+
+# 停止服务
+docker stop fnmusic
+
+# 卸载
+bash /share/MusicApp/fnmusic/uninstall.sh
+```
+
+## 📂 目录说明
+
+| 目录 | 说明 |
+|------|------|
+| `/share/MusicApp/data` | 数据库、配置 |
+| `/share/MusicApp/music` | 下载的音乐文件 |
+
+## ⚠️ 注意事项
+
+- 默认端口：**8001**
 - 仅供学习交流使用
 - 请支持正版音乐
-- 部分无损音乐需要VIP账号
-
-## License
-
-MIT

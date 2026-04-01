@@ -11,7 +11,7 @@ echo ""
 # 配置
 APP_NAME="fnmusic"
 INSTALL_DIR="/share/MusicApp"
-PORT=8000
+PORT=8001
 
 # 检查是否为root
 if [ "$EUID" -ne 0 ]; then
